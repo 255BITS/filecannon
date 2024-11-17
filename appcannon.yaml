@@ -1,0 +1,111 @@
+name: filecannon
+description: "AI-powered file generation CLI tool that creates new files based on examples and natural language descriptions"
+
+dependencies:
+  - openai
+  - anthropic
+
+cli:
+  command: filecannon
+  arguments:
+    - name: prompt
+      type: str
+      help: "Description of file to generate"
+      required: true
+  options:
+    - name: example
+      flag: -e
+      long_flag: --example
+      type: str
+      multiple: true
+      help: "Path to example file(s)"
+    - name: model
+      flag: -m
+      long_flag: --model
+      type: str
+      help: "Model to use"
+      default: "claude-3-5-sonnet-20240620"
+    - name: output
+      flag: -o
+      long_flag: --output
+      type: str
+      help: "Output directory"
+      default: "."
+
+components:
+  AIManager:
+    description: "Handles AI interactions and prompt management"
+    methods:
+      - name: generate_content
+        params:
+          - prompt: str
+          - examples: List[str]
+          - example_contents: List[str]
+        returns: str
+      - name: construct_prompt
+        params:
+          - user_prompt: str
+          - context: dict
+        returns: str
+
+  FileManager:
+    description: "Handles file operations and tool implementations"
+    methods:
+      - name: list_files
+        params:
+          - directory: str
+        returns: List[str]
+      - name: read_file
+        params:
+          - path: str
+        returns: str
+      - name: write_file
+        params:
+          - path: str
+          - content: str
+        returns: bool
+      - name: validate_path
+        params:
+          - path: str
+        returns: bool
+
+  ToolParser:
+    description: Allows xml use of tools by filecannon
+
+config:
+  env_vars:
+    - ANTHROPIC_API_KEY if using claude 
+    - OPENAI_API_KEY if using openai
+    - OPENAI_ENDPOINT if using openai, defaults to "https://api.openai.com/v1/chat/completions"
+
+prompts:
+  system: |
+    You are an AI file generator. Generate new file content based on provided examples and description.
+    Follow the structure and conventions shown in the example files. Content should be practical and production-ready.
+    Use the write_file tool to output your response, choosing an appropriate filename based on the content and context.
+
+  conversation_flow:
+    - role: system
+      content: "{system_prompt}"
+    - role: user
+      content: "{user_prompt}, you have access to list_files"
+    - role: assistant
+      content: "{prefilled_list_files_result}"
+    - role: user
+      content: "you have access to read_file"
+    - role: assistant
+      content: "{prefilled_read_file_results}"
+    - role: user
+      content: "you have access to write_file"
+    - role: assistant
+      content: "{generated_content_with_write_file_tool}"
+
+tool_formats:
+  write_file: |
+    <use_tool>
+        <name>write_file</name>
+        <path>path/to/output/filename.ext</path>
+        <content>
+            [generated content]
+        </content>
+    </use_tool>
