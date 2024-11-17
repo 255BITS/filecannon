@@ -4,14 +4,10 @@
 
 FileCannon is an AI-powered file generation CLI tool that creates new files based on examples and natural language descriptions. It leverages AI models to generate content, making it easy to quickly create files with a structure similar to provided examples.
 
-## Usage
-
-To use FileCannon, you need to have Python installed on your system. First, clone the repository and install the required dependencies:
+## Installation
 
 ```bash
-git clone git@github.com:255BITS/filecannon.git
-cd filecannon
-pip install -r requirements.txt
+pip install filecannon
 ```
 
 Then, you can use the `filecannon` command with the following syntax:
