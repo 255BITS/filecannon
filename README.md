@@ -106,3 +106,5 @@ This project is a CLI tool and does not include any JavaScript functions.
 5. Always ensure you have the necessary API keys and permissions set up before using the tool.
 
 6. The generated content aims to be practical and production-ready, following the structure and conventions shown in the example files.
+
+*Part of the [255labs.xyz](https://255labs.xyz) toolkit for AI-first development.*

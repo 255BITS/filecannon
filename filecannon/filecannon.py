@@ -33,7 +33,7 @@ def main():
     parser = argparse.ArgumentParser(description="filecannon: AI-powered file generation CLI tool")
     parser.add_argument("prompt", help="Description of the file to generate")
     parser.add_argument("-e", "--example", action="append", help="Path to example file(s)")
-    parser.add_argument("-m", "--model", default="claude-3-5-sonnet-20240620", help="Model to use")
+    parser.add_argument("-m", "--model", default="claude-3-5-sonnet-20241022", help="Model to use")
     parser.add_argument("-o", "--output", default=".", help="Output directory")
 
     args = parser.parse_args()
