@@ -5,6 +5,7 @@ import os
 from typing import List
 from ai_agent_toolbox import Toolbox, XMLParser, XMLPromptFormatter
 from filecannon.file_manager import FileManager
+from .ai_manager import AIManager
 
 class FileCannon:
     def __init__(self):
@@ -44,7 +45,7 @@ class FileCannon:
 
         # Generate and parse response
         manager = AIManager(model)
-        response = manager.generate_content(system, prompt)
+        response = manager.generate_content(system_prompt, prompt)
         # Execute parsed tool calls
         for event in self.parser.parse(response):
             self.toolbox.use(event)
