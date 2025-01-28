@@ -10,17 +10,11 @@ class AIManager:
         self.openai_client = openai.Client(api_key=os.getenv("OPENAI_API_KEY"))
         self.openai_endpoint = os.getenv("OPENAI_ENDPOINT", "https://api.openai.com/v1/chat/completions")
 
-    def generate_content(self, prompt: str, output_dir: str, examples: List[str], example_contents: List[str]) -> str:
-        full_prompt, system = self.construct_prompt(prompt, {
-            "output_dir": output_dir,
-            "examples": examples,
-            "example_contents": example_contents
-        })
-
+    def generate_content(self, system: str, prompt: str) -> str:
         if self.model.startswith("claude"):
-            return self._generate_with_anthropic(full_prompt, system)
+            return self._generate_with_anthropic(prompt, system)
         else:
-            return self._generate_with_openai(full_prompt, system)
+            return self._generate_with_openai(prompt, system)
 
     def construct_prompt(self, user_prompt: str, context: dict) -> str:
         system_prompt = """You are FileCannon, an AI-powered file generation tool. Your task is to create new files based on examples and natural language descriptions. 
