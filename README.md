@@ -85,4 +85,6 @@ This project is a CLI tool and does not include any JavaScript functions.
    - openai
    - anthropic
 
+3. This project uses [ai-agent-toolbox](https://github.com/255BITS/ai-agent-toolbox) for tool management and XML handling.
+
 *Part of the [255labs.xyz](https://255labs.xyz) toolkit for AI-first development.*
