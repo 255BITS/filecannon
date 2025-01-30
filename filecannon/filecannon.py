@@ -43,6 +43,10 @@ class FileCannon:
         # Prepare examples content
         example_contents = [FileManager.read_file(ex) for ex in examples]
         user_prompt = self._build_prompt(prompt, examples, example_contents)
+        print("SYSTEM PROMPT", system_prompt)
+        print("---")
+        print("USER PROMPT", user_prompt)
+        print("---")
 
         # Generate and parse response
         manager = AIManager(model)
@@ -54,7 +58,7 @@ class FileCannon:
     def _build_prompt(self, prompt: str, examples: List[str], contents: List[str]) -> str:
         user_prompt = prompt
         if examples:
-            user_prompt += "\n\nExamples:\n"
+            user_prompt += "\n\nExisting files for reference:\n"
             for path, content in zip(examples, contents):
                 user_prompt += f"File: {path}\n{content}\n\n"
         return user_prompt
