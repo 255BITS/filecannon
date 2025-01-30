@@ -79,7 +79,7 @@ This project is a CLI tool and does not include any JavaScript functions.
 1. Environment Variables:
    - Set `ANTHROPIC_API_KEY` if using Claude models
    - Set `OPENAI_API_KEY` if using OpenAI models
-   - Set `OPENAI_ENDPOINT` if using OpenAI (defaults to "https://api.openai.com/v1/chat/completions")
+   - Set `OPENAI_BASE_URL` if using OpenAI (defaults to "https://api.openai.com")
 
 2. Dependencies:
    - openai

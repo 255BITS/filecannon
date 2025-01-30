@@ -7,8 +7,8 @@ class AIManager:
     def __init__(self, model: str = "claude-3-5-sonnet-20240620"):
         self.model = model
         self.anthropic_client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-        self.openai_client = openai.Client(api_key=os.getenv("OPENAI_API_KEY"))
-        self.openai_endpoint = os.getenv("OPENAI_ENDPOINT", "https://api.openai.com/v1/chat/completions")
+        base_url = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1/chat/completions")
+        self.openai_client = openai.Client(api_key=os.getenv("OPENAI_API_KEY"), base_url=base_url)
 
     def generate_content(self, system: str, prompt: str) -> str:
         if self.model.startswith("claude"):
