@@ -20,6 +20,7 @@ class FileCannon:
 
         # Setup tools with current output_dir
         def write_file(file_path: str, content: str):
+            print("Writing to", file_path, "--", content)
             full_path = os.path.join(output_dir, file_path)
             FileManager.write_file(full_path, content)
 
