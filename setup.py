@@ -13,6 +13,7 @@ setup(
     install_requires=[
         "openai>=1.0.0",
         "anthropic>=0.6.0",
+        "ai-agent-toolbox>=0.2.0",
     ],
     include_package_data=True,
     entry_points={
