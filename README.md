@@ -92,3 +92,10 @@ This project is a CLI tool and does not include any JavaScript functions.
 ## License
 
 MIT
+
+## GitHub source releases
+
+Update the package version in `setup.py` in the release PR. When the version
+change reaches `main`, the distribution build and tests qualify the exact
+commit for a GitHub release tagged `v<version>`. PyPI publishing runs as a
+separate job.
